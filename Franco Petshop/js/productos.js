@@ -44,21 +44,25 @@ function filtrarJuguetes(produc) {
 function renderArticulos(articulos,id) {
     let div = "";
     articulos.forEach(item => { 
-        div += `<div class='col'>`
-        div += `<div class='card h-100' id=''>`
+        div += `<div class='col cards'>`
+        div += `<div class='card cards-side front' >`
         div += `<img src='${item.imagen}' alt=''>`
         div += `<div class='card-body'>`
         div += `<h5 class='card-title'>${item.nombre}</h5>`
-        div += `<p class='card-text'>${item.descripcion}</p>`
-        div += `<h2> ${item.precio} </h2>`
         div += `</div>`
         div += `<div class ='text-center'>`
-        div += `<a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)">Comprar</a>`
+        div += `<h2>$ ${item.precio} </h2>`
+        div += `<a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)"></a>`
         div += `</div>`
+        div += `</div>`
+        div += `<div class='cards-side back'>`
+        div += `<p class='card-text h5'>${item.descripcion}</p>`
+        div += `<a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)">Comprar</a>`
         div += `</div>`
         div += `</div>`
         
     })
+    
     
     document.getElementById(id).innerHTML = div
 }

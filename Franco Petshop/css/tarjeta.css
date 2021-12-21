@@ -1,0 +1,41 @@
+.cards {
+    perspective: 150rem;
+    position: relative;
+    height: 30rem;
+    max-width: 400px;
+    box-shadow: none;
+    background: none;
+    width: 43%;
+    float: left;
+  }
+  
+  .cards-side {
+    height: 29rem;
+    border-radius: 15px;
+    transition: all 0.8s ease;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    width: 80%;
+    padding:2rem;
+    color: white
+  }
+  
+  .cards-side.back {
+    transform: rotateY(-180deg);
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%,#C850C0 46%, #FFCC70 100%);
+  }
+  
+  .cards-side.front {
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  }
+  
+  .cards:hover .cards-side.front {
+    transform: rotateY(180deg);
+  }
+  
+  .cards:hover .cards-side.back {
+    transform: rotateY(0deg);
+  }
