@@ -1,8 +1,9 @@
 function agregarArticulo(e) {
+    console.log(e)
     e.preventDefault();
     //cuando click en agregar carrito lo añada
 
-    const producto = e.target.parentElement.parentElement;
+    const producto = e.target.parentElement.parentElement.parentElement;
 
     console.log(producto)
     leerDatos(producto)
@@ -10,6 +11,7 @@ function agregarArticulo(e) {
 
 // obtengo los datos del documento
 function leerDatos(producto) {
+    console.log(producto)
     // creo el objeto para capturar la imagen, precio,nombre,etc
     const infoProducto = {
         imagen: producto.querySelector('img').src,
@@ -19,6 +21,7 @@ function leerDatos(producto) {
         cantidad: 1
 
     }
+    console.log(infoProducto.precio)
 
     guardarProductosLocalStorage(infoProducto)
     // let arrayLocalStorage = obtenerProductosLocalStorege();
@@ -133,5 +136,58 @@ calcularTotal();
 
 
 
-    document.addEventListener('DOMContentLoaded', leerLocalStorageCompra())
+ document.addEventListener('DOMContentLoaded', leerLocalStorageCompra())
+
+
+ // validaciones de la compra
+ const cliente = document.getElementById('cliente');
+const correo = document.getElementById('correo');
+
+
+ function procesarCompra(e) {
+    e.preventDefault();
+    //evalua si tiene algun producto
+    if (obtenerProductosLocalStorege().length === 0) {
+        
+        swal({
+            type: "error",
+            title: "Oops... X",
+            text: "no hay ningun producto seleccionado",
+            showConfirmButton: false,
+        }).then(function () {
+            window.location = "productos.html";
+        });
+      
+        
+        // evalua q todos los campos esten llenados 
+    } else if (cliente.value === '' || correo.value === '') {
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'ingrese todos los campos requeridos',
+            timer: 2000,
+            showConfirmButton: false
+        })
+    }
+    else {
+        swal({
+            type: 'info',
+            title: 'Su compra fue realizada con exito' + '\n'
+                + 'Muchas Gracias Por su Compra',
+            text: 'los detalles del pago le llegaran por e-mail',
+        })
+        .then(function () {
+            
+            vaciarLocalStorage();
+            window.location = "productos.html";
+        })
+
+    }
+
+
+}
+
+function vaciarLocalStorage() {
+    localStorage.clear();
+}
 

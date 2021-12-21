@@ -44,22 +44,33 @@ function filtrarJuguetes(produc) {
 function renderArticulos(articulos,id) {
     let div = "";
     articulos.forEach(item => { 
+        
+        
         div += `<div class='col cards'>`
-        div += `<div class='card cards-side front' >`
-        div += `<img src='${item.imagen}' alt=''>`
-        div += `<div class='card-body'>`
-        div += `<h5 class='card-title'>${item.nombre}</h5>`
+           div += `<div class='padre'>`
+                 div += `<div class='card cards-side front' >`
+                     div += `<img src='${item.imagen}' alt=''>`
+                        div += `<div class='card-body'>`
+                            div += `<h5 class='card-title'>${item.nombre}</h5>`
+                        div += `</div>`
+                        div += `<div class ='text-center'>`
+                            div += `<h2>${item.precio} </h2>`
+
+
+                             div += `<a href="" class="btn btn-block btn-primary " id="${item._id}">stock ${item.stock}</a>`
+                                if (item.stock < 5) {
+                                div += `<div class="stock"> <p>Ultimas unidades disponibles</p> </div>`
+                                }
+
+                         div += `</div>`
+                 div += `</div>`
+                div += `<div class='cards-side back'>`
+                    div += `<p class='card-text h5'>${item.descripcion}</p>`
+                    div += `<div class="comprar"><a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)">Comprar</a> </div>`
+                div += `</div>`
+             div += `</div>`
         div += `</div>`
-        div += `<div class ='text-center'>`
-        div += `<h2>$ ${item.precio} </h2>`
-        div += `<a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)"></a>`
-        div += `</div>`
-        div += `</div>`
-        div += `<div class='cards-side back'>`
-        div += `<p class='card-text h5'>${item.descripcion}</p>`
-        div += `<a href="" class="btn btn-block btn-primary " id="${item._id}" onclick="agregarArticulo(event)">Comprar</a>`
-        div += `</div>`
-        div += `</div>`
+        
         
     })
     
