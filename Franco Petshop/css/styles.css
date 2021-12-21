@@ -235,3 +235,8 @@ header.abajo ul li a {
   .textwidget * {
     text-align: center;
     }
+
+
+    .textImport{
+      text-align-last: right;
+    }

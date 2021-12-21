@@ -66,18 +66,15 @@ function elimarProductoLocal(e) {
     let productoLS;
     producto.parentElement.remove(); // elimina los elementos del html
     productoLS = JSON.parse(localStorage.getItem('productos'))
-    console.log(productoLS)
-    
-    console.log(idProducto)
+
     // obtengo los articulos q sean distintos al id y lo cargo al localStorage
     let eliminar= productoLS.filter(item =>{
         return item.id !== idProducto
     })
     localStorage.setItem('productos', JSON.stringify(eliminar)) 
+    calcularTotal()
 
 }
-
-
 
 
 
@@ -114,5 +111,27 @@ function leerLocalStorageCompra() {
     })
 }
 
-// <a class="btn btn-outline-dark mt-auto" id="deleteButton5"><i
-//  class="bi bi-trash"></i></a>
+// calculos 
+function calcularTotal() {
+    let productoLS;
+    let total = 0, subtotal = 0, igv = 0;
+    productoLS = this.obtenerProductosLocalStorege();
+    console.log(productoLS)
+    for (let index = 0; index < productoLS.length; index++) {
+        let element = Number(productoLS[index].precio * productoLS[index].cantidad);
+        total = total + element;
+
+    }
+    igv = parseFloat(total * 0.21).toFixed(2);
+    
+    subtotal = parseFloat(total - igv).toFixed(2);
+    document.getElementById('subtotal').innerHTML = "$ " + subtotal;
+    document.getElementById('iva').innerHTML = "$ " + igv;
+    document.getElementById('total').innerHTML = "$ " + total.toFixed(2);
+}
+calcularTotal();
+
+
+
+    document.addEventListener('DOMContentLoaded', leerLocalStorageCompra())
+
